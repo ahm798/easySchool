@@ -22,3 +22,25 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# IDE files
+.vscode
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Maven build directory
+target/
+**/target/
+webschool/target/
+
+# Eclipse specific files
+.classpath
+.project
+.settings/
+
+# Mac OS specific files
+.DS_Store
+
+
