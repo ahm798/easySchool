@@ -23,10 +23,24 @@
 hs_err_pid*
 replay_pid*
 
-
+# IDE files
 .vscode
+.idea/
+*.iml
+*.iws
+*.ipr
 
 # Maven build directory
-/home/ahmed/dev/spring/easySchool/webschool/target
-/home/ahmed/dev/spring/easySchool/webschool/target/*
+target/
+**/target/
+webschool/target/
+
+# Eclipse specific files
+.classpath
+.project
+.settings/
+
+# Mac OS specific files
+.DS_Store
+
 
