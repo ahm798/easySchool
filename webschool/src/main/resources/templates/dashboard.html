@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Eazy School - Dashboard</title>
+    <!-- Google fonts -->
+    <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="assets/css/style-starter.css">
+    <!-- Dashboard specific CSS -->
+    <style>
+        .dashboard-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            height: 100%;
+            transition: transform 0.3s ease;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .dashboard-card-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .dashboard-card-body {
+            padding: 1.5rem;
+        }
+        
+        .course-progress {
+            height: 8px;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+        
+        .stats-box {
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            color: #fff;
+        }
+        
+        .stats-box i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stats-blue {
+            background-color: var(--bs-primary);
+        }
+        
+        .stats-green {
+            background-color: var(--bs-success);
+        }
+        
+        .stats-orange {
+            background-color: var(--bs-warning);
+        }
+        
+        .stats-red {
+            background-color: var(--bs-danger);
+        }
+        
+        .announcement {
+            padding: 1rem;
+            border-left: 4px solid var(--bs-primary);
+            background-color: rgba(13, 110, 253, 0.1);
+            margin-bottom: 1rem;
+        }
+        
+        .calendar-event {
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-bottom: 0.75rem;
+            color: #fff;
+        }
+        
+        .event-lesson {
+            background-color: var(--bs-primary);
+        }
+        
+        .event-exam {
+            background-color: var(--bs-danger);
+        }
+        
+        .event-activity {
+            background-color: var(--bs-success);
+        }
+
+        .badge-secondary {
+            background-color: var(--bs-secondary);
+            color: #fff;
+            padding: 0.35rem 0.65rem;
+            border-radius: 50rem;
+            font-size: 0.75rem;
+        }
+
+        .badge-warning {
+            background-color: var(--bs-warning);
+            color: #000;
+            padding: 0.35rem 0.65rem;
+            border-radius: 50rem;
+            font-size: 0.75rem;
+        }
+
+        .badge-success {
+            background-color: var(--bs-success);
+            color: #fff;
+            padding: 0.35rem 0.65rem;
+            border-radius: 50rem;
+            font-size: 0.75rem;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- header -->
+    <div th:replace="~{header :: header}">...</div>
+    <!-- //header -->
+
+    <!-- inner banner -->
+    <section class="inner-banner py-5">
+        <div class="w3l-breadcrumb py-lg-5">
+            <div class="container pt-4 pb-sm-4">
+                <h4 class="inner-text-title pt-5">Dashboard</h4>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a th:href="@{/home}">Home</a></li>
+                    <li class="active"><i class="fas fa-angle-right"></i> Dashboard</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- //inner banner -->
+
+    <!-- dashboard section -->
+    <section class="py-5">
+        <div class="container py-md-5 py-4">
+            <div class="row mb-5">
+                <div class="col-md-6">
+                    <h1>Welcome back, <span sec:authentication="name">Username</span>!</h1>
+                    <p class="lead">Here's what's happening with your courses today.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0"><i class="far fa-calendar-alt me-2"></i> <span th:text="${#dates.format(#dates.createNow(), 'EEEE, MMMM d, yyyy')}">Today's Date</span></p>
+                </div>
+            </div>
+
+            <!-- Stats Overview -->
+            <div class="row mb-5">
+                <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+                    <div class="stats-box stats-blue">
+                        <i class="fas fa-book-open"></i>
+                        <h3>4</h3>
+                        <p class="mb-0">Enrolled Courses</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+                    <div class="stats-box stats-green">
+                        <i class="fas fa-tasks"></i>
+                        <h3>85%</h3>
+                        <p class="mb-0">Avg. Completion</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+                    <div class="stats-box stats-orange">
+                        <i class="fas fa-clock"></i>
+                        <h3>12</h3>
+                        <p class="mb-0">Hours This Week</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+                    <div class="stats-box stats-red">
+                        <i class="fas fa-calendar-check"></i>
+                        <h3>2</h3>
+                        <p class="mb-0">Upcoming Events</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Course Progress -->
+                <div class="col-lg-8 mb-4">
+                    <div class="dashboard-card">
+                        <div class="dashboard-card-header d-flex justify-content-between align-items-center">
+                            <h4 class="m-0">My Courses</h4>
+                            <a href="#" class="btn btn-sm btn-outline-primary">View All</a>
+                        </div>
+                        <div class="dashboard-card-body">
+                            <!-- Course 1 -->
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h5>Mathematics</h5>
+                                    <span class="badge-success">Active</span>
+                                </div>
+                                <div class="progress course-progress mb-2">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <small>Progress: 75%</small>
+                                    <small>Next class: Today, 2:30 PM</small>
+                                </div>
+                            </div>
+
+                            <!-- Course 2 -->
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h5>English Literature</h5>
+                                    <span class="badge-success">Active</span>
+                                </div>
+                                <div class="progress course-progress mb-2">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <small>Progress: 60%</small>
+                                    <small>Next class: Tomorrow, 10:00 AM</small>
+                                </div>
+                            </div>
+
+                            <!-- Course 3 -->
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h5>Science</h5>
+                                    <span class="badge-warning">Upcoming</span>
+                                </div>
+                                <div class="progress course-progress mb-2">
+                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <small>Progress: 30%</small>
+                                    <small>Next class: Wednesday, 9:00 AM</small>
+                                </div>
+                            </div>
+
+                            <!-- Course 4 -->
+                            <div>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h5>Art & Craft</h5>
+                                    <span class="badge-secondary">Completed</span>
+                                </div>
+                                <div class="progress course-progress mb-2">
+                                    <div class="progress-bar bg-secondary" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <small>Progress: 100%</small>
+                                    <small>Final Grade: A+</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Announcements -->
+                <div class="col-lg-4 mb-4">
+                    <div class="dashboard-card">
+                        <div class="dashboard-card-header">
+                            <h4 class="m-0">Announcements</h4>
+                        </div>
+                        <div class="dashboard-card-body">
+                            <div class="announcement">
+                                <h5>Parent-Teacher Meeting</h5>
+                                <p class="mb-1">The quarterly parent-teacher meeting is scheduled for next Friday.</p>
+                                <small class="text-muted">Posted 2 hours ago</small>
+                            </div>
+                            <div class="announcement">
+                                <h5>Science Fair Registration</h5>
+                                <p class="mb-1">Registration for the annual science fair is now open. Submit your project idea by Friday.</p>
+                                <small class="text-muted">Posted yesterday</small>
+                            </div>
+                            <div class="announcement">
+                                <h5>Holiday Schedule</h5>
+                                <p class="mb-1">Check the updated holiday schedule for the upcoming month.</p>
+                                <small class="text-muted">Posted 3 days ago</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calendar -->
+                <div class="col-lg-4 mb-4">
+                    <div class="dashboard-card">
+                        <div class="dashboard-card-header">
+                            <h4 class="m-0">Upcoming Schedule</h4>
+                        </div>
+                        <div class="dashboard-card-body">
+                            <div class="calendar-event event-lesson">
+                                <h5 class="mb-1">Mathematics</h5>
+                                <p class="mb-0">Today, 2:30 PM - 3:30 PM</p>
+                                <small>Room 205</small>
+                            </div>
+                            <div class="calendar-event event-activity">
+                                <h5 class="mb-1">Chess Club</h5>
+                                <p class="mb-0">Today, 4:00 PM - 5:00 PM</p>
+                                <small>Activity Center</small>
+                            </div>
+                            <div class="calendar-event event-lesson">
+                                <h5 class="mb-1">English Literature</h5>
+                                <p class="mb-0">Tomorrow, 10:00 AM - 11:30 AM</p>
+                                <small>Room 101</small>
+                            </div>
+                            <div class="calendar-event event-exam">
+                                <h5 class="mb-1">Science Quiz</h5>
+                                <p class="mb-0">Wednesday, 9:00 AM - 10:00 AM</p>
+                                <small>Examination Hall</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Assignments -->
+                <div class="col-lg-8 mb-4">
+                    <div class="dashboard-card">
+                        <div class="dashboard-card-header d-flex justify-content-between align-items-center">
+                            <h4 class="m-0">Assignments</h4>
+                            <a href="#" class="btn btn-sm btn-outline-primary">View All</a>
+                        </div>
+                        <div class="dashboard-card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Course</th>
+                                        <th>Assignment</th>
+                                        <th>Due Date</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Mathematics</td>
+                                        <td>Linear Equations Worksheet</td>
+                                        <td>Today, 11:59 PM</td>
+                                        <td><span class="badge-warning">Pending</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>English Literature</td>
+                                        <td>Shakespeare Essay</td>
+                                        <td>Friday, 11:59 PM</td>
+                                        <td><span class="badge-warning">In Progress</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Science</td>
+                                        <td>Lab Report: Plant Growth</td>
+                                        <td>Next Monday, 9:00 AM</td>
+                                        <td><span class="badge-secondary">Not Started</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mathematics</td>
+                                        <td>Quadratic Equations Quiz</td>
+                                        <td>Yesterday, 11:59 PM</td>
+                                        <td><span class="badge-success">Submitted</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- //dashboard section -->
+
+    <!-- footer block -->
+    <div th:replace="~{footer :: footer}">...</div>
+    <!-- //footer block -->
+
+    <!-- Js scripts -->
+    <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+        <span class="fas fa-level-up-alt" aria-hidden="true"></span>
+    </button>
+    <script>
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () {
+            scrollFunction()
+        };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("movetop").style.display = "block";
+            } else {
+                document.getElementById("movetop").style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+    <!-- //move top -->
+
+    <!-- common jquery plugin -->
+    <script src="assets/js/jquery-3.3.1.min.js"></script>
+    <!-- //common jquery plugin -->
+
+    <!-- theme switch js (light and dark)-->
+    <script src="assets/js/theme-change.js"></script>
+    <!-- //theme switch js (light and dark)-->
+
+    <!-- MENU-JS -->
+    <script>
+        $(window).on("scroll", function () {
+            var scroll = $(window).scrollTop();
+
+            if (scroll >= 80) {
+                $("#site-header").addClass("nav-fixed");
+            } else {
+                $("#site-header").removeClass("nav-fixed");
+            }
+        });
+
+        //Main navigation Active Class Add Remove
+        $(".navbar-toggler").on("click", function () {
+            $("header").toggleClass("active");
+        });
+        $(document).on("ready", function () {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+            $(window).on("resize", function () {
+                if ($(window).width() > 991) {
+                    $("header").removeClass("active");
+                }
+            });
+        });
+    </script>
+    <!-- //MENU-JS -->
+
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+        $(function () {
+            $('.navbar-toggler').click(function () {
+                $('body').toggleClass('noscroll');
+            })
+        });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+
+    <!-- bootstrap -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- //bootstrap -->
+    <!-- //Js scripts -->
+</body>
+
+</html>

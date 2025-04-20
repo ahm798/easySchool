@@ -1,2 +1,8 @@
+ahm/dev/service/ContactServiceImpl.class
+ahm/dev/controller/AuthController.class
 ahm/dev/App.class
+ahm/dev/controller/ContactController.class
+ahm/dev/model/Contact.class
 ahm/dev/controller/HomeController.class
+ahm/dev/config/AppSec.class
+ahm/dev/service/ContactService.class
