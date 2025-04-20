@@ -5,6 +5,6 @@ import ahm.dev.model.Contact;
 
 
 public interface ContactService {
-    void sendContact(Contact contact);
+    boolean sendContact(Contact contact);
     void validateContact(Contact contact);
 }

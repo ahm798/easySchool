@@ -7,15 +7,15 @@ import ahm.dev.model.Contact;
 @Service
 public class ContactServiceImpl implements ContactService {
     @Override
-    public void sendContact(Contact contact) {
+    public boolean sendContact(Contact contact) {
         // Logic to send contact information
         System.out.println("Sending contact: " + contact);
+        return true; // Simulate successful sending
     }
 
     @Override
     public void validateContact(Contact contact) {
-        // Logic to validate contact information
-        
+        System.out.println("Validating contact: " + contact);
     }
 
 
