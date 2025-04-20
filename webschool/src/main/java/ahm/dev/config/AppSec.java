@@ -34,7 +34,7 @@ public class AppSec {
 
         // login process
         http.formLogin().loginPage("/login")
-            .defaultSuccessUrl("/home", true)   
+            .defaultSuccessUrl("/dashboard", true)   
             .failureUrl("/login?error=true")
             .permitAll();
 
@@ -52,7 +52,7 @@ public class AppSec {
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
         UserDetails user = User.builder()
-            .username("user")
+            .username("ahmed")
             .password(passwordEncoder().encode("pass"))
             .roles("USER")
             .build();

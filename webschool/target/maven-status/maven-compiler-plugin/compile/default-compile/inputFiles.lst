@@ -1,6 +1,7 @@
 /home/ahmed/dev/spring/easySchool/webschool/src/main/java/ahm/dev/service/ContactServiceImpl.java
 /home/ahmed/dev/spring/easySchool/webschool/src/main/java/ahm/dev/config/AppSec.java
 /home/ahmed/dev/spring/easySchool/webschool/src/main/java/ahm/dev/controller/HomeController.java
+/home/ahmed/dev/spring/easySchool/webschool/src/main/java/ahm/dev/controller/Dashboard.java
 /home/ahmed/dev/spring/easySchool/webschool/src/main/java/ahm/dev/service/ContactService.java
 /home/ahmed/dev/spring/easySchool/webschool/src/main/java/ahm/dev/App.java
 /home/ahmed/dev/spring/easySchool/webschool/src/main/java/ahm/dev/controller/AuthController.java
